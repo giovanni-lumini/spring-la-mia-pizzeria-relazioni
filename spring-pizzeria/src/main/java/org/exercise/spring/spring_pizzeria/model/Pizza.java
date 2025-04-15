@@ -1,10 +1,14 @@
 package org.exercise.spring.spring_pizzeria.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +33,10 @@ public class Pizza {
 
     @NotNull(message = "Il campo prezzo non può essere vuoto")
     private Integer prezzo;
+
+    // ONE TO MANY
+    @OneToMany(mappedBy = "pizza", cascade = { CascadeType.REMOVE })
+    private List<OffertaSpeciale> offerteSpeciali;
 
     // getter e setter
     public Integer getId() {
@@ -69,6 +77,14 @@ public class Pizza {
 
     public void setPrezzo(Integer prezzo) {
         this.prezzo = prezzo;
+    }
+
+    public List<OffertaSpeciale> getOfferteSpeciali() {
+        return this.offerteSpeciali;
+    }
+
+    public void setOfferteSpeciali(List<OffertaSpeciale> offerteSpeciali) {
+        this.offerteSpeciali = offerteSpeciali;
     }
 
     // toString
