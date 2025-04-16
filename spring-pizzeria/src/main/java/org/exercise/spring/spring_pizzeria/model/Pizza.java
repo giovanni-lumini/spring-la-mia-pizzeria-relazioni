@@ -36,7 +36,7 @@ public class Pizza {
 
     // ONE TO MANY
     @OneToMany(mappedBy = "pizza", cascade = { CascadeType.REMOVE })
-    private List<OffertaSpeciale> offerteSpeciali;
+    private List<SpecialOffer> offerteSpeciali;
 
     // getter e setter
     public Integer getId() {
@@ -79,11 +79,11 @@ public class Pizza {
         this.prezzo = prezzo;
     }
 
-    public List<OffertaSpeciale> getOfferteSpeciali() {
+    public List<SpecialOffer> getOfferteSpeciali() {
         return this.offerteSpeciali;
     }
 
-    public void setOfferteSpeciali(List<OffertaSpeciale> offerteSpeciali) {
+    public void setOfferteSpeciali(List<SpecialOffer> offerteSpeciali) {
         this.offerteSpeciali = offerteSpeciali;
     }
 

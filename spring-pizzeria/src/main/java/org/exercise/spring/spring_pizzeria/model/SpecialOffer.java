@@ -13,8 +13,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "offertaSpeciale")
-public class OffertaSpeciale {
+@Table(name = "specialOffer")
+public class SpecialOffer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,6 @@ public class OffertaSpeciale {
     private Pizza pizza;
 
     // getter e setter
-
     public Integer getId() {
         return this.id;
     }

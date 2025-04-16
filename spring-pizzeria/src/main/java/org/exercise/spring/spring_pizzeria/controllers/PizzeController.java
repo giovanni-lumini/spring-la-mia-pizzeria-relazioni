@@ -3,7 +3,8 @@ package org.exercise.spring.spring_pizzeria.controllers;
 import java.util.List;
 
 import org.exercise.spring.spring_pizzeria.model.Pizza;
-import org.exercise.spring.spring_pizzeria.repository.PizzeRepository;
+import org.exercise.spring.spring_pizzeria.model.SpecialOffer;
+import org.exercise.spring.spring_pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PizzeController {
 
     @Autowired
-    private PizzeRepository pizzeRepository;
+    private PizzaRepository pizzeRepository;
 
     // INDEX
     @GetMapping
@@ -90,4 +91,14 @@ public class PizzeController {
 
     }
 
+    // ONE TO MANY
+    // CREATE
+    // metodo per inserire l'offerta speciale della pizza (qui è un get)
+    @GetMapping("/{id}/specialoffer/create")
+    public String specialOffer(@PathVariable("id") Integer id, Model model) {
+        SpecialOffer specialOffer = new SpecialOffer();
+        specialOffer.setPizza(pizzeRepository.findById(id).get());
+        model.addAttribute("specialOffer", specialOffer);
+        return "specialOffer/create-or-edit";
+    }
 }

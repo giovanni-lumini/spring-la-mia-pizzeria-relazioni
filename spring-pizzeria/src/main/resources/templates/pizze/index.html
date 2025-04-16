@@ -11,19 +11,26 @@
     <!-- importo il frammento header -->
     <th:block th:replace="~{fragments/fragments :: header}"/>
 
-    <div class="text-center m-4">
+    <div class="d-flex justify-content-between my-5 mx-3">
         <!-- importo il frammento title -->
         <th:block th:replace="~{fragments/fragments :: title(pageTitle='Pizze menù')}"/>
+
+        <!-- importo il frammento button -->
+        <div th:insert="~{fragments/fragments :: button('/pizze/create', 'Crea una nuova pizza')}"></div>
+
     </div>
+
 
     <div class="container m-auto">
         <!-- searchbar per filtrare le pizze -->
-        <form action="pizze/nomePizza" method="get">
+        <form th:action="@{/pizze/nomePizza}" method="get">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Cerca una pizza" name="nome" required>
                 <button class="btn btn-outline-secondary" type="submit">Cerca</button>
             </div>
         </form>
+
+        <!-- http://localhost:8080/pizze/create -->
         
         <!-- card -->
         <div class="row d-flex justify-content-center">
@@ -53,6 +60,12 @@
     </div>
     
     <div th:text="Non ci sono pizze" th:unless="${pizze.size()>0}"></div>
+
+
+
+
+
+
 
     <div class="text-center m-4">
         <!-- importo il frammento button -->

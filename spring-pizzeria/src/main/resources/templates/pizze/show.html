@@ -25,6 +25,8 @@
                     <p class="card-text mb-5" style="height: 50px;">[[*{descrizione}]]</p>
                     <p class="card-text">€ [[*{prezzo}]]</p>
                 </div>
+
+                <a th:href="@{'/pizze/' + *{id} + '/specialoffer/create'}" class="btn btn-success btn-sm">Offerta</a>
             </div>
         </div>
     </div>
