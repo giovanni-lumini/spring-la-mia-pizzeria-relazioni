@@ -19,7 +19,7 @@
         <!-- FORM per CREARE una nuova offerta speciale -->
         <form 
             id="offertaSpeciale-form"
-            th:action="@{/specialoffer/create}"
+            th:action="${edit} ? @{'/specialoffer/edit/' + ${specialOffer.id}} : @{/specialoffer/create}"
             th:object="${specialOffer}"
             method="post">
 
