@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/ingredients")
@@ -53,6 +55,21 @@ public class IngredientController {
     }
 
     // update
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("ingredient", ingredientRepository.findById(id).get());
+        model.addAttribute("edit", true);
+        return "ingredients/create-or-edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@Valid @ModelAttribute("ingredient") Ingredient formIngredient, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "ingredients/create-or-edit";
+        }
+        ingredientRepository.save(formIngredient);
+        return "redirect:/ingredients";
+    }
 
     // delete
 
