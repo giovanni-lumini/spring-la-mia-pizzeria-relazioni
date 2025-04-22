@@ -7,7 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -34,9 +37,14 @@ public class Pizza {
     @NotNull(message = "Il campo prezzo non può essere vuoto")
     private Integer prezzo;
 
-    // ONE TO MANY
+    // one to many
     @OneToMany(mappedBy = "pizza", cascade = { CascadeType.REMOVE })
     private List<SpecialOffer> offerteSpeciali;
+
+    // many to many
+    @ManyToMany
+    @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private List<Ingredient> ingredients;
 
     // getter e setter
     public Integer getId() {
@@ -87,6 +95,14 @@ public class Pizza {
         this.offerteSpeciali = offerteSpeciali;
     }
 
+    public List<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     // toString
     @Override
     public String toString() {
@@ -94,7 +110,7 @@ public class Pizza {
                 ", nome=" + getNome() +
                 ", descrizione=" + getDescrizione() +
                 ", foto=" + getFoto() +
-                ", prezzo=" + getPrezzo();
+                ", prezzo=" + getPrezzo() +
+                ", categoria" + getIngredients();
     }
-
 }
