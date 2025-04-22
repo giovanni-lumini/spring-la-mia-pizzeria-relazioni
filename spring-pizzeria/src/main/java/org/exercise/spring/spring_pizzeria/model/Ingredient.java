@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -23,6 +24,12 @@ public class Ingredient {
     @NotBlank(message = "a category needs a name")
     @Size(min = 3, message = "min 3 chars long")
     private String nome;
+
+    @Lob
+    private String foto;
+
+    @Lob
+    private String descrizione;
 
     // relazione many to many
     @ManyToMany(mappedBy = "ingredients")
@@ -46,6 +53,22 @@ public class Ingredient {
         this.nome = nome;
     }
 
+    public String getFoto() {
+        return this.foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getDescrizione() {
+        return this.descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     public List<Pizza> getPizza() {
         return this.pizza;
     }
@@ -55,12 +78,16 @@ public class Ingredient {
     }
 
     // toString
+
     @Override
     public String toString() {
         return "{" +
                 " id='" + getId() + "'" +
                 ", nome='" + getNome() + "'" +
+                ", foto='" + getFoto() + "'" +
+                ", descrizione='" + getDescrizione() + "'" +
                 ", pizza='" + getPizza() + "'" +
                 "}";
     }
+
 }

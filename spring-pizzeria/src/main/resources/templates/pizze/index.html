@@ -20,7 +20,6 @@
 
     </div>
 
-
     <div class="container m-auto">
         <!-- searchbar per filtrare le pizze -->
         <form th:action="@{/pizze/nomePizza}" method="get">
@@ -53,19 +52,12 @@
                             </form>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
     </div>
     
     <div th:text="Non ci sono pizze" th:unless="${pizze.size()>0}"></div>
-
-
-
-
-
-
 
     <div class="text-center m-4">
         <!-- importo il frammento button -->
