@@ -1,6 +1,7 @@
 package org.exercise.spring.spring_pizzeria.controllers;
 
 import org.exercise.spring.spring_pizzeria.model.Ingredient;
+import org.exercise.spring.spring_pizzeria.model.Pizza;
 import org.exercise.spring.spring_pizzeria.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/ingredients")
@@ -72,5 +71,18 @@ public class IngredientController {
     }
 
     // delete
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+        Ingredient ingredientToDelete = ingredientRepository.findById(id).get();
+
+        // per ogni pizza (chiamata linkedPizza) dentro/collegata all'ingrediente
+        for (Pizza linkedPizza : ingredientToDelete.getPizze()) {
+            // elimino l'ingrediente all'interno della pizza
+            linkedPizza.getIngredients().remove(ingredientToDelete);
+        }
+        // elimino l'ingrediente (non più presente in nessuna pizza)
+        ingredientRepository.delete(ingredientToDelete);
+        return "redirect:/ingredients";
+    }
 
 }

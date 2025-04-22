@@ -33,7 +33,7 @@ public class Ingredient {
 
     // relazione many to many
     @ManyToMany(mappedBy = "ingredients")
-    private List<Pizza> pizza;
+    private List<Pizza> pizze;
 
     // getter e setter
 
@@ -69,12 +69,12 @@ public class Ingredient {
         this.descrizione = descrizione;
     }
 
-    public List<Pizza> getPizza() {
-        return this.pizza;
+    public List<Pizza> getPizze() {
+        return this.pizze;
     }
 
-    public void setPizza(List<Pizza> pizza) {
-        this.pizza = pizza;
+    public void setPizze(List<Pizza> pizze) {
+        this.pizze = pizze;
     }
 
     // toString
@@ -86,7 +86,7 @@ public class Ingredient {
                 ", nome='" + getNome() + "'" +
                 ", foto='" + getFoto() + "'" +
                 ", descrizione='" + getDescrizione() + "'" +
-                ", pizza='" + getPizza() + "'" +
+                ", pizze='" + getPizze() + "'" +
                 "}";
     }
 
