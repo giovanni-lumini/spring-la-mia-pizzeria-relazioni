@@ -13,58 +13,54 @@
 
     <main class="container mt-3">
         <h2 class="mt-2 mb-4 text-center">
-            Inserisci una nuova offerta speciale alla pizza "[[${specialOffer.pizza.nome}]]"
+            Inserisci un nuovo ingrediente
         </h2>
         
-        <!-- FORM per CREARE una nuova offerta speciale -->
+        <!-- FORM per CREARE una nuovo ingrediente -->
         <form 
-            id="offertaSpeciale-form"
-            th:action="${edit} ? @{'/specialoffer/edit/' + ${specialOffer.id}} : @{/specialoffer/create}"
-            th:object="${specialOffer}"
+            id="ingredient-form"
+            th:action="${edit} ? @{'/ingredients/edit/' + ${ingredient.id}} : @{/ingredients/create}"
+            th:object="${ingredient}"
             method="post">
-
-                <!-- informazione relativa alla pizza -->
-                <input type="hidden" th:field="*{pizza}" id="linked-pizza">
-
-                <!-- inserisco gli input per ogni campo di SpecialOffer -->
+                <!-- inserisco gli input per ogni campo di Ingrediet -->
                 <!-- input con gestione errori per ognuno -->
-                <!-- titolo -->
+                <!-- nome -->
                 <div class="mb-3">
-                    <label class="form-label" for="titolo">Titolo offerta:</label>
-                    <input class="form-control" placeholder="Inserisci qui il titolo" id="titolo" type="text" th:field="*{titolo}" th:errorClass="is-invalid">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('titolo')}">
+                    <label class="form-label" for="nome">Nome ingrediente:</label>
+                    <input class="form-control" placeholder="Inserisci qui il nome" id="nome" type="text" th:field="*{nome}" th:errorClass="is-invalid">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}">
                         <ul>
-                            <li th:each="error : ${#fields.errors('titolo')}" th:text="${error}"></li>
+                            <li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- foto -->
+                <div class="mb-3">
+                    <label class="form-label" for="foto">Foto:</label>
+                    <textarea class="form-control" placeholder="Inserisci qui l'url della foto" id="foto" th:field="*{foto}" th:errorClass="is-invalid"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('foto')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('foto')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- descrizione -->
+                <div class="mb-3">
+                    <label class="form-label" for="descrizione">Descrizione:</label>
+                    <textarea class="form-control" placeholder="Inserisci qui la descrizione" id="descrizione" th:field="*{descrizione}" th:errorClass="is-invalid"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('descrizione')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('descrizione')}" th:text="${error}"></li>
                         </ul>
                     </div>
                 </div>
                 
-                <!-- inizioOfferta -->
-                <div class="mb-3">
-                    <label class="form-label" for="inizioOfferta">Data inizio offerta:</label>
-                    <input class="form-control" id="inizioOfferta" type="date" th:field="*{inizioOfferta}" th:errorClass="is-invalid">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('inizioOfferta')}">
-                        <ul>
-                            <li th:each="error : ${#fields.errors('inizioOfferta')}" th:text="${error}"></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- fineOfferta -->
-                <div class="mb-3">
-                    <label class="form-label" for="fineOfferta">Data fine offerta:</label>
-                    <input class="form-control" id="fineOfferta" type="date" th:field="*{fineOfferta}" th:errorClass="is-invalid">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('fineOfferta')}">
-                        <ul>
-                            <li th:each="error : ${#fields.errors('fineOfferta')}" th:text="${error}"></li>
-                        </ul>
-                    </div>
-                </div>
-
                 <!-- submit -->
                 <div class="mb-5 d-flex justify-content-between">
-                    <button type="submit" class="btn btn-success">Inserisci offerta</button>
-                    <button type="submit" class="btn btn-warning" onclick="document.getElementById('offertaSpeciale-form').reset();">Svuota campi</button>
+                    <button type="submit" class="btn btn-success">Inserisci ingrediente</button>
+                    <button type="submit" class="btn btn-warning" onclick="document.getElementById('ingredient-form').reset();">Svuota campi</button>
                 </div>
         </form>
 
