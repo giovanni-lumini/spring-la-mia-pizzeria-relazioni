@@ -65,6 +65,14 @@
                     </div>
                 </div>
 
+                <!-- ingredient -->
+                <div class="mb-3">
+                    <div class="form-check" th:each="ingredient : ${ingredients}">
+                        <input class="form-check-input" type="checkbox" th:id="|ingredient-${ingredient.id}|" th:field="*{ingredients}" th:value="${ingredient.id}"/>
+                        <label class="form-check-label" th:for="|ingredient-${ingredient.id}|" th:text="${ingredient.nome}"></label>
+                    </div>
+                </div>
+
                 <!-- submit -->
                 <div class="mb-5 d-flex justify-content-between">
                     <button type="submit" class="btn btn-success">Invia</button>
